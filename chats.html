@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <title>Chats · Clubcom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Istok+Web:wght@700&display=swap">
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <div class="app" id="app" data-view="list">
+
+    <!-- ===== Left side: Chats / Friends / Me ===== -->
+    <aside class="sidebar">
+      <div class="side-head">
+        <div class="side-top">
+          <span class="wordmark">CLUBCOM</span>
+          <button class="icon-btn" id="composeBtn" type="button" aria-label="New message" title="New message">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><path d="M18.4 3.6a2 2 0 0 1 2.8 2.8L12 15.6l-3.6.8.8-3.6z"/></svg>
+          </button>
+        </div>
+        <h1 class="large-title" id="sideTitle">Chats</h1>
+      </div>
+
+      <div class="side-body">
+        <!-- Chats tab -->
+        <section id="tab-chats">
+          <ul class="list" id="chatList"></ul>
+          <div class="empty" id="chatsEmpty" hidden>
+            <strong>No chats yet</strong>
+            <span>Add some friends, then tap the pencil to start a chat.</span>
+            <button class="pill" type="button" data-goto="friends">Find friends</button>
+          </div>
+        </section>
+
+        <!-- Friends tab -->
+        <section id="tab-friends" hidden>
+          <label class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="peopleSearch" type="search" placeholder="Search people by name" autocomplete="off" aria-label="Search people by name">
+          </label>
+          <div id="requestsBlock" hidden>
+            <h2 class="section-label">Friend requests</h2>
+            <ul class="list" id="requestsList"></ul>
+          </div>
+          <div id="friendsBlock" hidden>
+            <h2 class="section-label">Your friends</h2>
+            <ul class="list" id="friendsList"></ul>
+          </div>
+          <h2 class="section-label" id="peopleLabel">Find new friends</h2>
+          <ul class="list" id="peopleList"></ul>
+          <div class="empty" id="peopleEmpty" hidden>No one matches that name yet.</div>
+        </section>
+
+        <!-- Me tab -->
+        <section id="tab-me" hidden>
+          <div class="me-card">
+            <div class="avatar" id="meAvatar"></div>
+            <div class="me-name" id="meName"></div>
+          </div>
+          <form class="field-row" id="nameForm">
+            <input id="nameInput" type="text" maxlength="60" placeholder="Your name" aria-label="Your name" autocomplete="name">
+            <button class="pill" type="submit">Save</button>
+          </form>
+          <button class="block-btn danger" id="logoutBtn" type="button">Log Out</button>
+        </section>
+      </div>
+
+      <nav class="tabbar" role="tablist" aria-label="Sections">
+        <button class="tab" role="tab" data-tab="chats" aria-selected="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.4 1.2 4.6 3.1 6.1-.2 1.4-.9 2.6-1.9 3.4 2 .1 3.9-.6 5.3-1.7 1.1.3 2.3.5 3.5.5 5.5 0 10-3.8 10-8.3S17.5 3 12 3z"/></svg>
+          Chats
+          <span class="badge" id="chatsBadge" hidden></span>
+        </button>
+        <button class="tab" role="tab" data-tab="friends" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="8" r="4"/><path d="M1.5 20c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5z"/><circle cx="17.5" cy="9" r="3"/><path d="M17.5 13.5c3 0 5 1.8 5 5h-4.4c-.2-2-1-3.6-2.4-4.8.6-.1 1.2-.2 1.8-.2z"/></svg>
+          Friends
+          <span class="badge" id="friendsBadge" hidden></span>
+        </button>
+        <button class="tab" role="tab" data-tab="me" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7zm0 14a8 8 0 0 1-6.2-3c1.4-1.7 3.6-2.6 6.2-2.6s4.8.9 6.2 2.6A8 8 0 0 1 12 20z"/></svg>
+          Me
+        </button>
+      </nav>
+    </aside>
+
+    <!-- ===== Right side: open chat ===== -->
+    <main class="pane">
+      <div class="pane-empty" id="paneEmpty">Pick a chat on the left, or start a new one with the pencil.</div>
+
+      <div class="chat" id="chat" hidden>
+        <header class="chat-head">
+          <button class="back" id="backBtn" type="button" aria-label="Back to chats">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg>
+            Chats
+          </button>
+          <button class="chat-title-btn" id="titleBtn" type="button" aria-label="Chat details">
+            <span class="avatar sm" id="chatAvatar"></span>
+            <span class="chat-title" id="chatTitle"></span>
+            <span class="chat-sub" id="chatSub"></span>
+          </button>
+          <button class="icon-btn" id="infoBtn" type="button" aria-label="Chat details" title="Chat details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v6" stroke-linecap="round"/><circle cx="12" cy="7.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </button>
+        </header>
+
+        <div class="messages" id="messages" aria-live="polite"></div>
+
+        <form class="composer" id="composer">
+          <textarea id="messageInput" rows="1" placeholder="Message" aria-label="Message" maxlength="4000"></textarea>
+          <button class="send" id="sendBtn" type="submit" aria-label="Send" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+          </button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <div class="backdrop" id="sheetBackdrop" hidden>
+    <div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+  </div>
+  <div class="toast" id="toast" role="status" hidden></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="/supabase.js"></script>
+  <script src="/chat.js"></script>
+</body>
+</html>

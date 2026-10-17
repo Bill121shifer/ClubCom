@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Log In · Clubcom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Istok+Web:wght@400;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="screen">
+    <header class="welcome">
+      <p class="eyebrow">WELCOME BACK TO</p>
+      <h1 class="brand"><a href="/">CLUBCOM!</a></h1>
+      <p class="tagline">Let’s get you connected!</p>
+    </header>
+
+    <section class="panel" aria-labelledby="title">
+      <h2 class="page-title" id="title">Log In</h2>
+      <form id="form" novalidate>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <p class="message" id="msg" role="status" hidden></p>
+        <button class="btn small" id="submit" type="submit">Log In</button>
+      </form>
+      <p class="switch">New here? <a class="link" href="/signup.html">Sign up</a></p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="/supabase.js"></script>
+  <script>
+    const form = document.getElementById("form");
+    const msg = document.getElementById("msg");
+    const submit = document.getElementById("submit");
+
+    db.auth.getSession().then(({ data }) => {
+      if (data.session) location.replace("/chats.html");
+    });
+    if (new URLSearchParams(location.search).has("confirmed")) {
+      showMessage(msg, "Your email is confirmed. Log in below.", "ok");
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      if (!email || !password) {
+        showMessage(msg, "Enter your email and password.", "error");
+        return;
+      }
+
+      submit.disabled = true;
+      submit.textContent = "Logging in…";
+      const { error } = await db.auth.signInWithPassword({ email, password });
+      submit.disabled = false;
+      submit.textContent = "Log In";
+
+      if (error) {
+        showMessage(msg, friendlyError(error), "error");
+        return;
+      }
+      location.replace("/chats.html");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Clubcom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Istok+Web:wght@400;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="screen">
+    <header class="welcome">
+      <p class="eyebrow">WELCOME TO</p>
+      <h1 class="brand">CLUBCOM!</h1>
+      <p class="tagline">Let’s get you connected!</p>
+    </header>
+
+    <section class="panel" aria-label="Get started">
+      <a class="btn" href="/signup.html">Sign Up</a>
+      <p class="or" aria-hidden="true">Or</p>
+      <a class="btn" href="/login.html">Log In</a>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="/supabase.js"></script>
+  <script>
+    // Already logged in? Skip straight to the home page.
+    db.auth.getSession().then(({ data }) => {
+      if (data.session) location.replace("/chats.html");
+    });
+  </script>
+</body>
+</html>

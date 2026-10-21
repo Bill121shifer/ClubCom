@@ -99,8 +99,10 @@
     for (const b of document.querySelectorAll(".tab")) b.setAttribute("aria-selected", String(b.dataset.tab === tab));
     $("tab-chats").hidden = tab !== "chats";
     $("tab-friends").hidden = tab !== "friends";
+    $("tab-wall").hidden = tab !== "wall";
+    $("tab-calendar").hidden = tab !== "calendar";
     $("tab-me").hidden = tab !== "me";
-    $("sideTitle").textContent = { chats: "Chats", friends: "Friends", me: "Me" }[tab];
+    $("sideTitle").textContent = { chats: "Chats", friends: "Friends", wall: "Wall", calendar: "Calendar", me: "Me" }[tab];
     $("composeBtn").hidden = tab !== "chats";
     if (tab === "friends") { refreshFriends(); searchPeople($("peopleSearch").value); }
   }

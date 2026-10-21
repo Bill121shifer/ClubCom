@@ -1,18 +1,18 @@
 /* Clubcom — styles shared by every page.
    Phone: matches the Figma frame. PC (900px+): two columns. */
 :root {
-  --sky: #5da9e9;
-  --sky-deep: #4a97d9;
-  --button: #c3c3c3;
-  --button-hover: #d4d4d4;
-  --ink: #000000;
+  --sky: #dd1c1a;
+  --sky-deep: #c41616;
+  --button: #f4d701;
+  --button-hover: #ffe85a;
+  --ink: #111111;
   --paper: #ffffff;
   --error: #8b0000;
   --error-bg: #ffe3e3;
   --ok-bg: #e3f6e8;
   --ok: #0b5a24;
   --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-brand: "Istok Web", "Inter", system-ui, sans-serif;
+  --font-brand: Georgia, "Times New Roman", serif;
 }
 
 * { box-sizing: border-box; }
@@ -41,16 +41,17 @@ body {
 .welcome { display: flex; flex-direction: column; min-width: 0; }
 .eyebrow {
   margin: 0;
-  color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-brand);
   font-size: 35px;
   line-height: 1.2;
   font-weight: 400;
 }
 .brand {
   margin: 4px 0 0;
-  color: var(--paper);
+  color: var(--ink);
   font-family: var(--font-brand);
-  font-weight: 400;
+  font-weight: 700;
   font-size: 35px;
   line-height: 1.2;
 }
@@ -75,7 +76,8 @@ body {
   border-radius: 0;
   background: var(--button);
   color: var(--ink);
-  font-family: var(--font-ui);
+  font-family: var(--font-brand);
+  font-weight: 700;
   font-size: clamp(32px, 10vw, 50px);
   line-height: 1;
   min-height: 78px;

@@ -1,22 +1,22 @@
 /* Clubcom chat app — iPhone Messages feel, Clubcom blue.
    Phone: one screen at a time (list → chat). PC (900px+): list on the left, chat on the right. */
 :root {
-  --bg: #ffffff;
-  --surface: #f2f2f7;
+  --bg: #fff8e8;
+  --surface: #fff0b8;
   --raised: #ffffff;
-  --line: #dcdce1;
-  --text: #000000;
-  --muted: #8a8a8e;
-  --brand: #5da9e9;
-  --accent: #1a7bd0;
-  --bubble-me: #1a7bd0;
+  --line: #1d1d1d;
+  --text: #111111;
+  --muted: #644f39;
+  --brand: #dd1c1a;
+  --accent: #dd1c1a;
+  --bubble-me: #dd1c1a;
   --bubble-me-text: #ffffff;
   --bubble-them: #e9e9eb;
   --bubble-them-text: #000000;
   --danger: #d70015;
   --backdrop: rgba(0, 0, 0, .35);
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, sans-serif;
-  --font-brand: "Istok Web", "Inter", system-ui, sans-serif;
+  --font-brand: Georgia, "Times New Roman", serif;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -95,7 +95,7 @@ input, textarea { font: inherit; color: var(--text); }
 
 .tabbar {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   border-top: 1px solid var(--line);
   background: var(--bg);
   padding-bottom: env(safe-area-inset-bottom);
@@ -503,6 +503,23 @@ button.row:hover, .row.active { background: var(--surface); }
 }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- Community ---------- */
+.community-view { padding: 12px 16px 28px; }
+.community-head { border: 2px solid var(--text); background: var(--brand); color: #fff8e8; padding: 18px; margin: 2px 0 14px; }
+.community-head h2 { font-family: var(--font-brand); font-size: 30px; margin: 2px 0 5px; color: #fff8e8; }
+.community-head p { margin: 0; }
+.community-kicker { font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+.community-form { display: grid; gap: 8px; margin-bottom: 18px; }
+.community-form input, .community-form textarea { width: 100%; border: 2px solid var(--text); border-radius: 0; background: #fff; color: var(--text); padding: 11px; font: inherit; }
+.community-form textarea { min-height: 86px; resize: vertical; }
+.club-btn { border: 2px solid var(--text); border-radius: 0; background: #f4d701; color: var(--text); font-family: var(--font-brand); font-size: 19px; font-weight: 700; padding: 10px; cursor: pointer; }
+.community-list { display: grid; gap: 12px; }
+.community-card { position: relative; border: 2px solid var(--text); background: #fff; padding: 15px; box-shadow: 4px 4px 0 var(--brand); }
+.community-card h3 { margin: 0 42px 4px 0; font-family: var(--font-brand); font-size: 22px; }
+.community-meta { margin: 0 0 10px; color: var(--muted); font-size: 13px; font-weight: 600; }
+.community-copy { margin: 0; white-space: pre-wrap; line-height: 1.45; }
+.community-delete { position: absolute; top: 10px; right: 10px; border: 0; background: none; color: var(--brand); font-weight: 700; cursor: pointer; }
 
 /* ---------- PC layout ---------- */
 @media (min-width: 900px) {
